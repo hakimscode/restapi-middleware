@@ -23,6 +23,8 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('/login', 'AuthController@login');
 });
 
+Route::get('dashboard', 'DashboardController@index')->middleware('auth:api');
+
 Route::group(['prefix' => 'profile'], function () {
     Route::get('/{id}', 'ProfileController@index')->middleware('auth:api', 'own');
     Route::put('/{id}', 'ProfileController@update')->middleware('auth:api', 'own');
