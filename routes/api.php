@@ -24,6 +24,6 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 Route::group(['prefix' => 'profile'], function () {
-    Route::get('/', 'ProfileController@index')->middleware('auth:api');
+    Route::get('/{id}', 'ProfileController@index')->middleware('auth:api', 'own');
     Route::put('/{id}', 'ProfileController@update')->middleware('auth:api', 'own');
 });

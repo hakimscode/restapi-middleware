@@ -8,10 +8,13 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    public function index(Request $request){
-        $userId = $request->header('Authorization');
-        $user_session = $request->session()->get($userId);
-        return response()->json(['name' => $user_session['name']]);
+    public function index($id){
+        try{
+            $user = User::findOrFail($id);
+            return response()->json($user, 200);
+        }catch (QueryException $e){
+            return response()->json(['message' => $e->errorInfo], 400);
+        }
     }
 
     public function update(Request $request, $id){
